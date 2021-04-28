@@ -1,0 +1,454 @@
+﻿<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome file</title>
+  <link rel="stylesheet" href="https://stackedit.io/style.css" />
+</head>
+
+<body class="stackedit">
+  <div class="stackedit__html"><h2 id="dashboard-screen">Dashboard screen</h2>
+<p><strong>Page Link</strong>: <a href="http://api.creditnirvana.tk:3000/home/Collections">http://api.creditnirvana.tk:3000/home/Collections</a></p>
+<h3 id="uget-all-cases-against-casetypeidu"><u>Get all cases against caseTypeId</u></h3>
+<p><strong>Method</strong> : GET</p>
+<p><strong>URL</strong> : “<a href="https://607cb0f0184368001769c732.mockapi.io/ligitationDashboard?caseTypeId=1">https://607cb0f0184368001769c732.mockapi.io/ligitationDashboard?caseTypeId=1</a>”</p>
+<p><strong>RESPONSE</strong> :</p>
+<pre><code>
+[
+
+{
+
+"total_cases": 6,
+
+"total_tatBreached": 2,
+
+"total_pending": 0,
+
+"steps": [
+
+{
+
+"stepId": 1,
+
+"stepName": "notice intitated"
+
+},
+
+{
+
+"stepId": 2,
+
+"stepName": "warning notice",
+
+"inProgress": 3,
+
+"pending": 2,
+
+"tatBreached": 1
+
+},
+
+{
+
+"stepId": 3,
+
+"stepName": "Resending Warning notice",
+
+"inProgress": 0,
+
+"pending": 0,
+
+"tatBreached": 2
+
+},
+
+{
+
+"stepId": 4,
+
+"stepName": "Filing court petition",
+
+"inProgress": 0,
+
+"pending": 0,
+
+"tatBreached": 0
+
+}
+
+]
+
+}
+
+]
+
+</code></pre>
+<h2 id="section-screen">Section screen</h2>
+<h3 id="utrack-cases-statusu"><u>Track Cases Status</u></h3>
+<p><strong>Method</strong> : POST</p>
+<p><strong>URL</strong> : “<a href="https://607cb0f0184368001769c732.mockapi.io/trackCaseStatus">https://607cb0f0184368001769c732.mockapi.io/trackCaseStatus</a>”</p>
+<ul>
+<li><strong>1) REQUEST PAYLOAD</strong> : (All Available Cases)</li>
+</ul>
+<pre><code>
+{
+
+caseTypeId : 2
+
+stepId : null,
+
+actionType:null
+
+}
+
+</code></pre>
+<ul>
+<li><strong>2) REQUEST PAYLOAD</strong> : (All Available Cases against actionType)</li>
+</ul>
+<pre><code>
+{
+
+caseTypeId : 2
+
+stepId : null,
+
+actionType: 'pending' | 'inProgress' | 'tatBreached'
+
+}
+
+</code></pre>
+<ul>
+<li><strong>3) REQUEST PAYLOAD</strong> : (All Available Cases against step)</li>
+</ul>
+<pre><code>
+{
+
+caseTypeId : 2
+
+stepId : 2,
+
+actionType: null
+
+}
+
+</code></pre>
+<ul>
+<li><strong>4) REQUEST PAYLOAD</strong> : (All Available Cases against step and actionType)</li>
+</ul>
+<pre><code>
+{
+
+caseTypeId : 2
+
+stepId : 2,
+
+actionType: 'pending' | 'inProgress' | 'tatBreached'
+
+}
+
+</code></pre>
+<p><strong>RESPONSE</strong> (show only active cases):</p>
+<pre><code>
+[
+
+{
+
+"id": 1,
+
+"loanId": "LSB215",
+
+"applicantName": "Ashwin",
+
+"caseId": "CI1456",
+
+"state": "TAT Breached",
+
+"caseInfoId": 2,
+
+"nextStep": "Resending Warning notice",
+
+"isActive":true
+
+},
+
+{
+
+"id": 2,
+
+"loanId": "LSB215",
+
+"applicantName": "Ashwin",
+
+"caseId": "CI1456",
+
+"caseInfoId": null,
+
+"state": "Pending",
+
+"nextStep": "warning notice",
+
+"isActive":true
+
+},
+
+{
+
+"id": 3,
+
+"loanId": "LSB215",
+
+"applicantName": "Ashwin",
+
+"caseId": "CI1456",
+
+"caseInfoId": 1,
+
+"state": "InProgess",
+
+"nextStep": "warning notice",
+
+"isActive":true
+
+}
+
+]
+
+</code></pre>
+<h3 id="umove-to-next-stepu"><u>Move to next step</u></h3>
+<p><strong>Method</strong> : PUT</p>
+<p><strong>URL</strong> : “<a href="https://607cb0f0184368001769c732.mockapi.io/trackCaseStatus">https://607cb0f0184368001769c732.mockapi.io/trackCaseStatus</a>”</p>
+<p><strong>REQUEST PAYLOAD</strong> :</p>
+<pre><code>
+{
+
+caseTypeId : 4,
+
+caseId : 12
+
+}
+
+</code></pre>
+<p><strong>RESPONSE</strong> : CASES SUCCESSFULLY MOVED TO NEXT STEP</p>
+<h2 id="cases-info">Cases Info</h2>
+<h3 id="uadd-case-infou"><u>Add Case Info</u></h3>
+<p><strong>Method</strong> : POST</p>
+<p><strong>URL</strong> : “<a href="https://607cb0f0184368001769c732.mockapi.io/trackCaseStatus">https://607cb0f0184368001769c732.mockapi.io/trackCaseStatus</a>”</p>
+<p><strong>REQUEST PAYLOAD</strong> :</p>
+<pre><code>
+{
+
+"id": 1,
+
+"caseId":1234,
+
+"courtName": "Alandur High Court",
+
+"judgeName": "Shanmuga Sundaram",
+
+"courtRoom": 13,
+
+"lawyerName": "Ravikiran",
+
+"lawyerEmail": "proraviki@gmail.com"
+
+}
+
+</code></pre>
+<h3 id="uupdate-case-infou"><u>Update Case Info</u></h3>
+<p><strong>Method</strong> : PUT</p>
+<p><strong>URL</strong> : “<a href="https://607cb0f0184368001769c732.mockapi.io/trackCaseStatus">https://607cb0f0184368001769c732.mockapi.io/trackCaseStatus</a>”</p>
+<p><strong>REQUEST PAYLOAD</strong> :</p>
+<pre><code>
+{
+
+"id": 1,
+
+"caseId":1234,
+
+"courtName": "Alandur High Court",
+
+"judgeName": "Shanmuga Sundaram",
+
+"courtRoom": 13,
+
+"lawyerName": "Ravikiran",
+
+"lawyerEmail": "proraviki@gmail.com"
+
+}
+
+</code></pre>
+<h3 id="uget-case-infou"><u>Get Case Info</u></h3>
+<p><strong>Method</strong> : GET</p>
+<p><strong>URL</strong> :</p>
+<p>“<a href="https://607cb0f0184368001769c732.mockapi.io/trackCaseStatus?caseId=1234">https://607cb0f0184368001769c732.mockapi.io/trackCaseStatus?caseId=1234</a>”</p>
+<p><strong>RESPONSE</strong> :</p>
+<pre><code>
+{
+
+"id": 1,
+
+"caseId":1234,
+
+"courtName": "Alandur High Court",
+
+"judgeName": "Shanmuga Sundaram",
+
+"courtRoom": 13,
+
+"lawyerName": "Ravikiran",
+
+"lawyerEmail": "proraviki@gmail.com"
+
+}
+
+</code></pre>
+<h2 id="view-indivual-cases-reminders-triggers">View Indivual cases Reminders triggers</h2>
+<h3 id="uget-active-remaindersu"><u>Get Active Remainders</u></h3>
+<p><strong>METHOD</strong> : POST</p>
+<p><strong>URL</strong> : <a href="https://607cb0f0184368001769c732.mockapi.io/trackRemainder?isActive=true">https://607cb0f0184368001769c732.mockapi.io/trackRemainder?isActive=true</a></p>
+<ul>
+<li><strong>1) REQUEST PAYLOAD</strong> :</li>
+</ul>
+<pre><code>
+{
+
+caseTypeId:2,
+
+caseId:12,
+
+isActive:true | false
+
+}
+
+</code></pre>
+<ul>
+<li><strong>2)REQUEST PAYLOAD</strong> :</li>
+</ul>
+<pre><code>
+{
+
+caseTypeId:2,
+
+caseId:null,
+
+isActive:true | false
+
+}
+
+</code></pre>
+<p><strong>RESPONSE</strong>:</p>
+<pre><code>
+[
+
+{
+
+"id": "12",
+
+"triggerDate": "22-Feb-2019",
+
+"loanId": "215",
+
+"applicateName": "Bala",
+
+"caseId": "1456",
+
+"activeStage": "Warning Notice",
+
+"nextStage": "Stage Remainder",
+
+"remainderStatus": "TAT Breached",
+
+"isActive": true
+
+},
+
+{
+
+"id": "129",
+
+"triggerDate": "01-Jan-2020",
+
+"loanId": "215",
+
+"applicateName": "Ashwin",
+
+"caseId": "456",
+
+"activeStage": "Legal Notice Intiated",
+
+"nextStage": "Warning Notice",
+
+"remainderStatus": "Stage Remainder",
+
+"isActive": true
+
+},
+
+{
+
+"id": "125",
+
+"triggerDate": "22-Feb-2020",
+
+"loanId": "215",
+
+"applicateName": "Vardhaman",
+
+"caseId": "456",
+
+"activeStage": "Warning Notice",
+
+"nextStage": "Legal Notice Intiated",
+
+"remainderStatus": "TAT Breached",
+
+"isActive": true
+
+}
+
+]
+
+</code></pre>
+<h3 id="uget-inactive-remaindersu"><u>Get Inactive Remainders</u></h3>
+<p><strong>METHOD</strong> : GET</p>
+<p><strong>URL</strong> : <a href="https://607cb0f0184368001769c732.mockapi.io/trackRemainder?isActive=true">https://607cb0f0184368001769c732.mockapi.io/trackRemainder?isActive=true</a></p>
+<p><strong>RESPONSE</strong>:</p>
+<pre><code>
+[
+
+{
+
+"id": "125",
+
+"triggerDate": "22-Feb-2020",
+
+"loanId": "215",
+
+"applicateName": "Ravi",
+
+"caseId": "456",
+
+"activeStage": "Warning Notice",
+
+"nextStage": "",
+
+"remainderStatus": "Stage Remainder",
+
+"isActive": false
+
+}
+
+]
+
+</code></pre>
+<h3 id="uturn-remainders-inactiveu"><u>Turn Remainders Inactive</u></h3>
+<p><strong>METHOD</strong> : PUT</p>
+<p><strong>URL</strong> : <a href="https://607cb0f0184368001769c732.mockapi.io/trackRemainder">https://607cb0f0184368001769c732.mockapi.io/trackRemainder</a></p>
+<p><strong>Response</strong> Remainder successfully dismissed</p>
+</div>
+</body>
+
+</html>
